@@ -43,6 +43,8 @@ class DefaultFirebaseOptions {
     }
   }
 
+  /// A éditer suivant le projet Firebase
+
   static const FirebaseOptions web = FirebaseOptions(
     apiKey: 'API_KEY_WEB',
     appId: 'APP_ID_WEB',
