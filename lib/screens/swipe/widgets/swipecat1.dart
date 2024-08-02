@@ -7,7 +7,6 @@ import 'package:new_feature/screens/swipe/widgets/custom_widgets.dart';
 import 'package:new_feature/screens/swipe/widgets/tabbar3items_second.dart';
 import 'package:new_feature/screens/swipe/widgets/widgets.dart';
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:csc_picker/csc_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_bounceable/flutter_bounceable.dart';
@@ -80,15 +79,15 @@ class _SwipeCAT1State extends State<SwipeCAT1>
                 child: Tabbar3itemsSecond(
                   tabController: _tabController,
                   context: context,
-                  onMapIconPressed: () => _openSheet(context),
+                  onMapIconPressed: () {},
                 ),
               ),
               body: TabBarView(
                 controller: _tabController,
                 children: [
-                  _buildGenderSpecificBlocCountry(selectedGender),
-                  _buildGenderSpecificBlocCountry(selectedGender),
-                  _buildGenderSpecificBlocCountry(selectedGender),
+                  _buildGenderSpecificBloc(selectedGender),
+                  _buildGenderSpecificBloc(selectedGender),
+                  _buildGenderSpecificBloc(selectedGender),
                 ],
               ),
             );
@@ -99,7 +98,7 @@ class _SwipeCAT1State extends State<SwipeCAT1>
     );
   }
 
-  Widget _buildGenderSpecificBlocCountry(String? selectedGender) {
+  Widget _buildGenderSpecificBloc(String? selectedGender) {
     return BlocConsumer<bloc.SwipeBloc, bloc.SwipeState>(
       listener: (context, state) {
         if (state.status == bloc.SwipeStatus.loaded) {
@@ -109,8 +108,8 @@ class _SwipeCAT1State extends State<SwipeCAT1>
       builder: (context, state) {
         if (state.status == bloc.SwipeStatus.initial) {
           bloc.SwipeEvent event = selectedGender == "Masculin"
-              ? bloc.SwipeFetchPostsOOTDMan()
-              : bloc.SwipeFetchPostsOOTDWoman();
+              ? bloc.SwipeFetchPostsCat1Man()
+              : bloc.SwipeFetchPostsCat1Woman();
           context.read<bloc.SwipeBloc>().add(event);
         }
         return Padding(
@@ -311,79 +310,6 @@ class _SwipeCAT1State extends State<SwipeCAT1>
       }
       addToFirstList = !addToFirstList;
     }
-  }
-
-  void _openSheet(BuildContext context) {
-    showModalBottomSheet(
-      isDismissible: true,
-      shape: const RoundedRectangleBorder(
-        borderRadius: BorderRadius.vertical(top: Radius.circular(15)),
-      ),
-      context: context,
-      builder: (BuildContext bottomSheetContext) {
-        return Container(
-          padding: const EdgeInsets.all(20),
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: <Widget>[
-              Text(
-                AppLocalizations.of(context)!.translate('location'),
-                textAlign: TextAlign.center,
-                style: Theme.of(context)
-                    .textTheme
-                    .headlineMedium!
-                    .copyWith(color: Colors.black),
-              ),
-              const SizedBox(height: 10),
-              CSCPicker(
-                flagState: CountryFlag.DISABLE,
-                onCountryChanged: (country) {
-                  setState(() {
-                    selectedCountry = country;
-                    selectedState = null;
-                    selectedCity = null;
-                  });
-                },
-                onStateChanged: (state) {
-                  setState(() {
-                    selectedState = state;
-                    selectedCity = null;
-                  });
-                },
-                onCityChanged: (city) {
-                  setState(() {
-                    selectedCity = city;
-                  });
-                },
-              ),
-              const SizedBox(height: 18),
-              TextButton(
-                onPressed: () {
-                  Navigator.pop(context);
-                },
-                style: TextButton.styleFrom(
-                  minimumSize: Size.zero,
-                  backgroundColor: couleurBleuClair2,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(10),
-                  ),
-                ),
-                child: Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                  child: Text(
-                    AppLocalizations.of(context)!.translate('validate'),
-                    style: Theme.of(context)
-                        .textTheme
-                        .headlineSmall!
-                        .copyWith(color: Colors.white),
-                  ),
-                ),
-              ),
-            ],
-          ),
-        );
-      },
-    );
   }
 
   @override

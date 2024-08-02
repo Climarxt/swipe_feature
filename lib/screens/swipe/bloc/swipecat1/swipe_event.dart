@@ -5,6 +5,6 @@ abstract class SwipeEvent extends Equatable {
   List<Object> get props => [];
 }
 
-class SwipeFetchPostsOOTDMan extends SwipeEvent {}
+class SwipeFetchPostsCat1Man extends SwipeEvent {}
 
-class SwipeFetchPostsOOTDWoman extends SwipeEvent {}
+class SwipeFetchPostsCat1Woman extends SwipeEvent {}

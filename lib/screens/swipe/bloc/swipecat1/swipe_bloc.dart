@@ -22,30 +22,30 @@ class SwipeBloc extends Bloc<SwipeEvent, SwipeState> {
         _authBloc = authBloc,
         logger = ContextualLogger('SwipeBloc'),
         super(const SwipeState.initial()) {
-    on<SwipeFetchPostsOOTDMan>(_onSwipeFetchPostsOOTDMan);
+    on<SwipeFetchPostsCat1Man>(_onSwipeFetchPostsCat1Man);
   }
 
-  Future<void> _onSwipeFetchPostsOOTDMan(
-    SwipeFetchPostsOOTDMan event,
+  Future<void> _onSwipeFetchPostsCat1Man(
+    SwipeFetchPostsCat1Man event,
     Emitter<SwipeState> emit,
   ) async {
-    const String functionName = '_onSwipeFetchPostsOOTDMan';
-    logger.logInfo(functionName, 'Début de la récupération des posts OOTD');
+    const String functionName = '_onSwipeFetchPostsCat1Man';
+    logger.logInfo(functionName, 'Début de la récupération des posts');
     try {
       final userId = '1ktzeQosrEOWFhKjKW5tMGXbfy22';
       final posts = await _swipeRepository.getSwipeMan(userId: userId);
-      logger.logInfo(functionName, 'Posts OOTD récupérés avec succès', {
+      logger.logInfo(functionName, 'Posts récupérés avec succès', {
         'userId': userId,
         'postsCount': posts.length,
       });
       emit(SwipeState.loaded(posts));
     } catch (e) {
       logger
-          .logError(functionName, 'Erreur lors du chargement des posts OOTD', {
+          .logError(functionName, 'Erreur lors du chargement des posts', {
         'error': e.toString(),
       });
       emit(SwipeState.error(
-          'SwipeFetchPostsOOTDMan : Erreur lors du chargement des posts: ${e.toString()}'));
+          'SwipeFetchPostsCat1Man : Erreur lors du chargement des posts: ${e.toString()}'));
     }
   }
 }
