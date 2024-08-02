@@ -1,19 +1,6 @@
 # new_feature
+C'est une partie du code qui permet d'afficher uniquement le screen Swipe, en supprimant le reste qui n'est pas pertinent.
 
-A new Flutter project.
-
-## Getting Started
-
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
-# new-feature
-# new-feature
-# swipe_feature
+## To do
+- Compléter les champs FirebaseOptions dans /new_feature/lib/firebase_options.dart afin de faire fonctionner la liaison avec Firebase.
+- Editer la valeur "1ktzeQosrEOWFhKjKW5tMGXbfy22" qui se trouve dans new_feature/lib/screens/swipe/bloc/swipecat1/swipe_bloc.dart et new_feature/lib/screens/swipe/widgets/swipecat1.dart par un "UID utilisateur" existant dans Authentification de firebase.
